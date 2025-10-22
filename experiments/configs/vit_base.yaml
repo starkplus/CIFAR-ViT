@@ -1,0 +1,54 @@
+# ViT-Base 配置文件
+
+# 模型配置
+model_type: 'vit_base'
+img_size: 32
+patch_size: 4
+embed_dim: 512
+depth: 6
+num_heads: 8
+
+# 数据配置
+data_dir: './data/cifar10'
+batch_size: 128
+num_workers: 4
+
+# 训练配置
+epochs: 100
+seed: 42
+
+# 优化器配置
+optimizer: 'adamw'
+learning_rate: 0.0003
+weight_decay: 0.0001
+momentum: 0.9
+
+# 学习率调度器
+scheduler: 'cosine'
+min_lr: 0.000001
+
+# 损失函数
+loss: 'cross_entropy'
+label_smoothing: 0.1
+
+# 数据增强
+use_mixup: false
+mixup_alpha: 1.0
+use_cutmix: false
+cutmix_alpha: 1.0
+
+# 正则化
+dropout: 0.1
+attn_dropout: 0.1
+clip_grad: true
+clip_value: 1.0
+
+# 日志和保存
+use_tensorboard: true
+log_dir: './experiments/results/logs/vit_base'
+save_dir: './experiments/results/checkpoints/vit_base'
+save_freq: 10
+
+# 不平衡数据集配置
+use_class_weights: false
+use_weighted_sampler: false

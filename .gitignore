@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.pyo
+*.ipynb_checkpoints
+data/cifar10/
+experiments/results/checkpoints/
+experiments/results/logs/
