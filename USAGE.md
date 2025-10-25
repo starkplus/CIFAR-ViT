@@ -35,7 +35,7 @@ python data/download_data.py
 
 ### 第三步：训练模型
 
-#### 选项 A：使用主程序（推荐）
+#### 使用主程序
 
 ```
 
@@ -52,30 +52,25 @@ python main.py train --config experiments/configs/dynamic_vit.yaml
 
 python main.py train --config experiments/configs/avit.yaml
 
+# 训练 imbalanced ViT
+
+python main.py train --config experiments/configs/vit_base_imbalanced.yaml --imbalanced
+
+# 训练 imbalanced_wight ViT
+
+python main.py train --config experiments/configs/vit_base_imbalanced_weighted.yaml --imbalanced
+
+# 训练 imbalanced_sampler ViT
+
+python main.py train --config experiments/configs/vit_base_imbalanced_sampler.yaml --imbalanced
+
+# 训练 imbalanced_weighted_sampler ViT
+
+python main.py train --config experiments/configs/vit_base_imbalanced_weighted_sampler.yaml --imbalanced
 ```
 
-#### 选项 B：在不平衡数据上训练
-
-```
-
-python main.py train --config experiments/configs/vit_base.yaml --imbalanced
-
-```
-
-#### 选项 C：使用训练脚本
-
-```
 
 
-# 平衡数据集
-
-python train/train_balanced.py --config experiments/configs/vit_base.yaml
-
-# 不平衡数据集
-
-python train/train_imbalanced.py --config experiments/configs/vit_base.yaml
-
-```
 
 ### 第四步：监控训练
 

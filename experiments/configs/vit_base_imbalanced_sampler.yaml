@@ -45,12 +45,12 @@ clip_value: 1.0
 
 # 日志和保存
 use_tensorboard: true
-log_dir: './experiments/results/logs/vit_base'
-save_dir: './experiments/results/checkpoints/vit_base'
+log_dir: './experiments/results/logs/vit_base_imbalanced_sampler'
+save_dir: './experiments/results/checkpoints/vit_base_imbalanced_sampler'
 save_freq: 10
 
 # 不平衡数据集配置
 use_class_weights: false
-use_weighted_sampler: false
+use_weighted_sampler: true
 ndices_path: './data/imbalanced_indices.npy'  # 指定不平衡索引
-use_imbalanced: false  # 默认使用不平衡数据训练
+use_imbalanced: true  # 默认使用不平衡数据训练
