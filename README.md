@@ -36,7 +36,7 @@
 
 ## 📁 项目结构
 
-
+```
  CIFAR-ViT/
  ├── data/ # 数据目录
  │ ├── cifar10/ # CIFAR-10 数据集
@@ -72,31 +72,29 @@
  ├── requirements.txt # 依赖包
  └── README.md # 项目说明
 
-
+```
 ## 🚀 快速开始
 
 ### 1. 环境配置
 
 
  克隆项目
+ ```bash
  git clone https://github.com/yourusername/CIFAR-ViT.git
  cd CIFAR-ViT
+ ```
  创建虚拟环境（推荐）
+ ```bash
  conda create -n cifar-vit python=3.8
-conda 创建-n cifar-vit python=3.8
- conda activate cifar-vit  conda 激活 cifar-vit
- 安装依赖
+ conda activate cifar-vit  
  pip install -r requirements.txt
-pip 安装 -r 要求.txt
- text
+```
 
 ### 2. 数据准备
-
-
  下载 CIFAR-10 数据集并创建不平衡版本
+ ```bash
  python data/download_data.py
-python 数据/download_data.py
- text
+```
 
 ### 3. 训练模型
 
@@ -104,63 +102,78 @@ python 数据/download_data.py
 
 
  训练 ViT-Base（平衡数据集）
+ ```bash
  python main.py train --config experiments/configs/vit_base.yaml
-python main.py train --config 实验/configs/vit_base.yaml
- 训练 ViT-Base（不平衡数据集）
- python main.py train --config experiments/configs/vit_base.yaml --imbalanced
+```
+
  训练 Dynamic ViT
+ ```bash
  python main.py train --config experiments/configs/dynamic_vit.yaml
-python main.py train --config 实验/configs/dynamic_vit.yaml
+```
  训练 Lightweight ViT
+ ```bash
  python main.py train --config experiments/configs/avit.yaml
-python main.py train --config 实验/configs/avit.yaml
- text
+```
+ 训练 imbalanced ViT
+ ```bash
+python main.py train --config experiments/configs/vit_base_imbalanced.yaml --imbalanced
+ ```
+  训练 imbalanced_wight ViT
+ ```bash
+python main.py train --config experiments/configs/vit_base_imbalanced_weighted.yaml --imbalanced
+ ```
+  训练 imbalanced_sampler ViT
+ ```bash
+python main.py train --config experiments/configs/vit_base_imbalanced_sampler.yaml --imbalanced
+ ```
+  训练 imbalanced_weighted_sampler ViT
+ ```bash
+python main.py train --config experiments/configs/vit_base_imbalanced_weighted_sampler.yaml --imbalanced
+ ```
 
 #### 方式二：使用训练脚本
 
 
  在平衡数据集上训练
+ ```bash
  python train/train_balanced.py --config experiments/configs/vit_base.yaml
-python train/train_balanced.py --config 实验/configs/vit_base.yaml
+  ```
  在不平衡数据集上训练
+```bash
  python train/train_imbalanced.py --config experiments/configs/vit_base.yaml
-python train/train_imbalanced.py --config 实验/configs/vit_base.yaml
- text
+```
 
 #### 方式三：批量训练（使用shell脚本）
 
-
+```bash
  chmod +x scripts/run_training.sh
-chmod +x 脚本/run_training.sh
  ./scripts/run_training.sh
- text
+```
 
 ### 4. 评估模型
 
 
  评估训练好的模型
- python main.py evaluate   python main.py 评估
- --config experiments/configs/vit_base.yaml 
---配置实验/configs/vit_base.yaml
+ ```bash
+python main.py evaluate --config experiments/configs/vit_base.yaml 
  --checkpoint experiments/results/checkpoints/vit_base/best_model.pth
---检查点实验/结果/检查点/vit_base/best_model.pth
+```
  或使用评估脚本
+```bash
  chmod +x scripts/run_evaluation.sh
-chmod +x 脚本/run_evaluation.sh
  ./scripts/run_evaluation.sh
- text
-
+```
 ### 5. 复杂度分析
 
 
  分析所有模型
+ ```bash
  python main.py analyze --config experiments/configs/vit_base.yaml
-python main.py 分析 --config 实验/configs/vit_base.yaml
+```
  分析指定模型
- python main.py analyze --config experiments/configs/vit_base.yaml 
-python main.py 分析 --config 实验/configs/vit_base.yaml
- --models vit_base dynamic_vit
- text
+ ```bash
+ python main.py analyze --config experiments/configs/vit_base.yaml --models vit_base dynamic_vit
+```
 
 ## 📊 模型对比
 
@@ -177,7 +190,7 @@ python main.py 分析 --config 实验/configs/vit_base.yaml
 
 配置文件位于 `experiments/configs/` 目录下，主要参数包括：
 
-
+```
  模型配置
  model_type: 'vit_base' # 模型类型
  img_size: 32 # 图像大小
@@ -195,7 +208,9 @@ python main.py 分析 --config 实验/configs/vit_base.yaml
  不平衡数据处理
  use_class_weights: true # 使用类别权重
  use_weighted_sampler: false # 使用加权采样
- text
+ ndices_path: './data/imbalanced_indices.npy'  # 指定不平衡索引
+ use_imbalanced: false  # 默认使用不平衡数据训练
+```
 
 ## 📈 实验结果
 
@@ -232,15 +247,15 @@ python main.py 分析 --config 实验/configs/vit_base.yaml
 项目提供两种方法处理类别不平衡：
 
 1. **加权采样** (Weighted Sampling)
-
+```bash
  use_weighted_sampler: true
-使用加权采样器：true
- text
+```
 
-2. **类别权重损失** (Class-weighted Loss)
 
+1. **类别权重损失** (Class-weighted Loss)
+```
  use_class_weights: true  use_class_weights：true
- text
+```
 
 ### 减少过拟合
 
@@ -261,18 +276,18 @@ python main.py 分析 --config 实验/configs/vit_base.yaml
 ### 1. CUDA out of memory
 
 减小 batch size 或使用更小的模型：
-
+```
  batch_size: 64 # 降低 batch size
  model_type: 'vit_small' # 使用更小的模型
  text
-
+```
 ### 2. 数据加载慢
 
 调整数据加载器参数：
-
+```
  num_workers: 8 # 增加工作线程
  pin_memory: true # 启用 pin memory
- text
+```
 
 ### 3. 训练不收敛
 
@@ -292,13 +307,7 @@ python main.py 分析 --config 实验/configs/vit_base.yaml
 - **Haonan Wang**: 模型实现、训练框架搭建、数据处理、评估指标实现、可视化、实验分析、文档编写
 
 
-## 📝 License
 
-本项目采用 MIT License - 详见 [LICENSE](LICENSE) 文件。
-
-## 🤝 贡献
-
-欢迎提交 Issue 和 Pull Request！
 
 ## 📧 联系方式
 
